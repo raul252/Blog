@@ -1,0 +1,87 @@
+﻿@model Blog.Models.ViewModels.ArticuloVM
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-center">Editar artículo</h3>
+
+<form method="POST" asp-action="Create" enctype="multipart/form-data">
+    <div class="row px-2 mx-2 border">
+        <input type="hidden" asp-for="Articulo.Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+        <div class="col-8 mt-4">
+            <div class="form-group row mt-4">
+                <div class="col-4">
+                    <label asp-for="Articulo.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Articulo.Name" class="form-control" />
+                    <span asp-validation-for="Articulo.Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mt-4">
+                <div class="col-4">
+                    <label asp-for="Articulo.Descripcion"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="Articulo.Descripcion" class="form-control" style="height:300px"></textarea>
+                    <span asp-validation-for="Articulo.Descripcion" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mt-4">
+                <div class="col-4">
+                    <label asp-for="Articulo.CategoryId"></label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Articulo.CategoryId, Model.ListaCategories,
+                   "Por favor seleccione una categoría", new { @Class = "form-control" })
+                    <span asp-validation-for="Articulo.CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mt-4">
+                <div class="col-4">
+                    <label asp-for="Articulo.UrlImage"></label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="archivos" id="subidaArchivos" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row mt-4">
+                <div class="col-8 offset-4">
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.Articulo.Id">Actualizar</button>
+                            &nbsp;
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success form-control">Volver a lista</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4 pt-3">
+             <img src="/@Model.Articulo.UrlImage" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script src="https://cdn.tiny.cloud/1/35odpgmi0ck64ryjm64szoyaknacar1eyuc34jemb8cp5h0i/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            toolbar: 'file edit format',
+            toolbar_mode: 'floating',
+        });
+    </script>
+}

@@ -10,6 +10,8 @@ namespace Blog.AccesoDatos.Data.Repository
     {
         ICategoryRepository Category { get; }
 
+        IArticuloRepository Articulo { get; }
+
         void Save();
     }
 }
