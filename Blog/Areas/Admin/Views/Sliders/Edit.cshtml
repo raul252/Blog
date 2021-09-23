@@ -1,0 +1,71 @@
+﻿@model Blog.Models.Slider
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-center">Editar slider</h3>
+
+<form method="POST" asp-action="Create" enctype="multipart/form-data">
+    <div class="row px-2 mx-2 border">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+        <div class="col-8 mt-4">
+            <div class="form-group row mt-4">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mt-4">
+                <div class="col-4">
+                    <label asp-for="Estado"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Estado" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mt-4">
+                <div class="col-4">
+                    <label asp-for="UrlImagen"></label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="archivos" id="subidaArchivos" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row mt-4">
+                <div class="col-8 offset-4">
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.Id">Actualizar</button>
+                            &nbsp;
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success form-control">Volver a lista</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4 pt-3">
+            @if (Model.UrlImagen != null)
+            {
+                <img src="/@Model.UrlImagen" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+            }
+
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+
+}

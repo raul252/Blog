@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-8">
                     @Html.DropDownListFor(m => m.Articulo.CategoryId, Model.ListaCategories,
-                   "Por favor seleccione una categoría", new { @Class = "form-control" })
+    "Por favor seleccione una categoría", new { @Class = "form-control" })
                     <span asp-validation-for="Articulo.CategoryId" class="text-danger"></span>
                 </div>
             </div>
@@ -68,8 +68,11 @@
         </div>
 
         <div class="col-4 pt-3">
-             <img src="/@Model.Articulo.UrlImage" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
-        </div>
+            @if (Model.Articulo.UrlImage != null)
+            {
+                <img src="/@Model.Articulo.UrlImage" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9;" />
+            } 
+            </div>
     </div>
 </form>
 

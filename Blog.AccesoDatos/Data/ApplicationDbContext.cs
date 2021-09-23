@@ -17,5 +17,7 @@ namespace Blog.AccesoDatos.Data
         public DbSet<Category> Category { get; set; }
 
         public DbSet<Articulo> Articulo { get; set; }
+
+        public DbSet<Slider> Slider { get; set; }
     }
 }

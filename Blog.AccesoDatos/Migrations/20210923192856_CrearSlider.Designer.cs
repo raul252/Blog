@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210923192456_CrearSlider")]
+    [Migration("20210923192856_CrearSlider")]
     partial class CrearSlider
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

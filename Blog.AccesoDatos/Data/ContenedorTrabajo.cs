@@ -17,11 +17,14 @@ namespace Blog.AccesoDatos.Data
             _db = db;
             Category = new CategoryRepository(_db);
             Articulo = new ArticuloRepository(_db);
+            Slider = new SliderRepository(_db);
         }
 
         public ICategoryRepository Category { get; private set; }
 
         public IArticuloRepository Articulo { get; private set; }
+
+        public ISliderRepository Slider { get; private set; }
 
         public void Dispose()
         {
