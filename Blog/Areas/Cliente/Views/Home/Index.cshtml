@@ -1,8 +1,69 @@
-﻿@{
+﻿@model Blog.Models.ViewModels.HomeVM
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bienvenido al curso ASP.NET Core 5</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Slider-->
+<header>
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @{ int counter = 0; }
+            @foreach (var item in Model.listaSliders)
+            {
+                var itemDinamico = counter++ == 0 ? "active" : "item";
+                <div class="carousel-item @itemDinamico" data-bs-interval="10000">
+                    <img src="@Url.Content(item.UrlImagen)" class="d-block w-100" alt="@item.Name">
+                    <h1 class="text-dark text-center">@Html.Raw(item.Name)</h1>
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Atrás</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+</header>
+
+<!-- Titulo -->
+<div class="row fondo-titulo mt-5">
+    <div class="col-sm-12 py-5">
+        <h1 class="text-center text-white">Últimos cursos y tutoriales</h1>
+    </div>
 </div>
+
+<!-- Articulos -->
+@if (Model.listaArticulos.Count() > 0)
+{
+    <hr />
+    <div class="row">
+        @foreach (var articulo in Model.listaArticulos.OrderBy(o => o.Id))
+        {
+            <div class="col-4">
+                <div class="card">
+                    @if (articulo.UrlImage != null)
+                    {
+                    <img src="@articulo.UrlImage" class="img-thumbnail" width="100%" />
+                    }
+                    <div class="card-body text-center">
+                        <h5>
+                            @articulo.Name
+                        </h5>
+                        <p>@articulo.CreatedAt</p>
+                        <a asp-action="Details" class="btn btn-success" style="border-radius: 2px" asp-route-id="@articulo.Id">
+                            Más información
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No hay artículos</p>
+}
+
