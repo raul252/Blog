@@ -1,4 +1,5 @@
 using Blog.AccesoDatos.Data;
+using Blog.AccesoDatos.Data.Inicializador;
 using Blog.AccesoDatos.Data.Repository;
 using Blog.Models;
 using Blog.Utilidades;
@@ -44,8 +45,9 @@ namespace Blog
 
             services.AddSingleton<IEmailSender, EmailSender>();
 
-
             services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
+
+            services.AddScoped<IInicializadorDB, InicializadorDB>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
@@ -54,7 +56,7 @@ namespace Blog
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IInicializadorDB dbInicial)
         {
             if (env.IsDevelopment())
             {
@@ -71,6 +73,8 @@ namespace Blog
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            dbInicial.Inicializar();
 
             app.UseAuthentication();
             app.UseAuthorization();
